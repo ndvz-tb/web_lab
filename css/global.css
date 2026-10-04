@@ -1,57 +1,41 @@
+/* css/global.css */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Mulish', sans-serif;
-    overflow-x: hidden;
-}
-
-a {
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
 }
 
-.btn {
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 18px;
+h2, h3, h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+button {
     cursor: pointer;
-    border-radius: 55px;
+    background-color: #3498db;
+    color: #fff;
     border: none;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.btn--primary {
-    background-color: #458FF6;
-    color: #FFFFFF;
-    padding: 15px 40px;
-}
-
-.btn--primary:hover {
-    background-color: #2b70d4;
-}
-
-.btn--outline {
-    background-color: transparent;
-    color: #458FF6;
-    border: 2px solid #458FF6;
-    padding: 15px 45px;
-}
-
-.btn--outline:hover {
-    background-color: #458FF6;
-    color: #FFFFFF;
+button:hover {
+    background-color: #2980b9;
 }

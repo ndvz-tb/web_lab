@@ -1,135 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trafalgar</title>
-    
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Clips - View Page</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/cards.css">
 </head>
 <body>
-    
-<header class="header">
-  <div class="container header__container">
-    
-    <a href="#" class="logo header__logo">
-      <img src="../images/logo.svg" alt="Trafalgar Logo" class="logo__img">
-    </a>
+    <header class="header">
+        <div class="logo">ClipsApp</div>
+        <nav class="nav">
+            <a href="index.html" class="active">View Clips</a>
+            <a href="create.html">Create Clip</a>
+        </nav>
+    </header>
 
-    <button class="burger-icon" id="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Фільтри та Сортування</h3>
+            <div class="filter-group">
+                <label for="searchInput">Пошук за назвою або виконавцем:</label>
+                <input type="text" id="searchInput" placeholder="Введіть текст...">
+                <button id="searchBtn">Шукати</button>
+                <button id="clearSearchBtn">Очистити</button>
+            </div>
+            
+            <div class="filter-group">
+                <label>Сортувати за переглядами:</label>
+                <button id="sortDescBtn">За спаданням (більше)</button>
+                <button id="sortAscBtn">За зростанням (менше)</button>
+            </div>
+            
+            <div class="filter-group">
+                <h4>Статистика</h4>
+                <p>Загальна тривалість кліпів: <span id="totalDuration">0</span> сек.</p>
+                <button id="countTotalBtn">Підрахувати</button>
+            </div>
+        </aside>
 
-    <nav class="nav header__nav">
-      <ul class="nav__list">
-        <li class="nav__item"><a href="#" class="nav__link nav__link--active">Home</a></li>
-        <li class="nav__item"><a href="#" class="nav__link">Find a doctor</a></li>
-        <li class="nav__item"><a href="#" class="nav__link">Apps</a></li>
-        <li class="nav__item"><a href="#" class="nav__link">Testimonials</a></li>
-        <li class="nav__item"><a href="#" class="nav__link">About us</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+        <main class="content">
+            <h2>Список кліпів</h2>
+            <div id="clipsContainer" class="cards-container">
+                <!-- Картки будуть додаватись через JS -->
+            </div>
+        </main>
+    </div>
 
- <main> 
-    <section class="hero">
-        <img src="../images/element.svg" alt="" aria-hidden="true" class="hero__dots hero__dots--top-left">
-        <div class="container hero__container">
-            <div class="hero__content">
-                <h1 class="hero__title">Virtual healthcare for you</h1>
-                <p class="hero__text">Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone</p>
-                <button class="btn btn--primary hero__btn">Consult today</button>
-            </div>
-            <div class="hero__image-wrapper">
-                <img src="../images/trafalgar-header illustration 1.svg" alt="Virtual healthcare illustration" class="hero__image">
-            </div>
-        </div>
-    </section>
-
-    <section class="info-block">
-        <div class="container info-block__container">
-            <div class="info-block__image-wrapper">
-                <img src="../images/trafalgar-illustration sec02 1.svg" alt="Healthcare providers" class="info-block__image">
-            </div>
-            <div class="info-block__content">
-                <h2 class="info-block__title">Leading healthcare providers</h2>
-                <hr class="info-block__risk">
-                <p class="info-block__text">Trafalgar provides progressive, and affordable healthcare, accessible on mobile and online for everyone. To us, its not just work. We take pride in the solutions we deliver</p>
-                <button class="btn btn--outline">Learn more</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="services">
-        <img src="../images/Vector.svg" alt="" class="services__bg-blob"> 
-        <div class="container services__container">
-            <div class="services__header">
-                <h2 class="services__title">Our services</h2>
-                <hr class="services__divider">
-                <p class="services__text">We provide to you the best choices for you. Adjust it to your health needs and make sure your undergo treatment with our highly qualified doctors you can consult with us which type of service is suitable for your health</p>
-            </div>
-            <div class="services__grid">
-                <article class="services-card">
-                    <img src="../images/Frame.svg" alt="Search doctor" class="services-card__icon">
-                    <h3 class="services-card__title">Search doctor</h3>
-                    <p class="services-card__text">Choose your doctor from thousands of specialist, general, and trusted hospitals</p>
-                </article>            
-                <article class="services-card">
-                    <img src="../images/Frame (1).svg" alt="Online pharmacy" class="services-card__icon">
-                    <h3 class="services-card__title">Online pharmacy</h3>
-                    <p class="services-card__text">Buy your medicines with our mobile application with a simple delivery system</p>
-                </article>
-                <article class="services-card">
-                    <img src="../images/Frame (2).svg" alt="Consultation" class="services-card__icon">
-                    <h3 class="services-card__title">Consultation</h3>
-                    <p class="services-card__text">Free consultation with our trusted doctors and get the best recomendations</p>
-                </article>
-                <article class="services-card">
-                    <img src="../images/Frame (3).svg" alt="Details info" class="services-card__icon">
-                    <h3 class="services-card__title">Details info</h3>
-                    <p class="services-card__text">Free consultation with our trusted doctors and get the best recomendations</p>
-                </article>
-                <article class="services-card">
-                    <img src="../images/Frame (4).svg" alt="Emergency care" class="services-card__icon">
-                    <h3 class="services-card__title">Emergency care</h3>
-                    <p class="services-card__text">You can get 24/7 urgent care for yourself or your children and your lovely family</p>
-                </article>
-                <article class="services-card">
-                    <img src="../images/Group.svg" alt="Tracking" class="services-card__icon">
-                    <h3 class="services-card__title">Tracking</h3>
-                    <p class="services-card__text">Track and sav your medical history and health data</p>
-                </article>
-            </div>
-            <div class="services__btn-wrapper">
-                <button class="btn btn--outline">Learn more</button>
-            </div>
-        </div>
-        <img src="../images/elementservices.svg" alt="" aria-hidden="true" class="services__dots">
-    </section>
-
-    <footer class="footer">
-        <div class="container footer__container">
-            <a href="#" class="logo footer__logo">
-                <img src="../images/trafalgar.svg" alt="Trafalgar" class="logo__img">
-            </a>
-            <div class="footer__nav">
-                <span class="footer__heading">Company</span>
-                <span class="footer__heading">Region</span>
-                <span class="footer__heading">Help</span>
-            </div>
-        </div>
-        <img src="../images/elementbig.svg" class="footer__dots footer__dots--top-right" alt="" aria-hidden="true">
-        <img src="../images/elementwhite.svg" class="footer__dots footer__dots--bottom-left" alt="" aria-hidden="true">
-    </footer>
- </main>
-
- <script src="../js/main.js"></script>
+    <script src="../js/dom.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

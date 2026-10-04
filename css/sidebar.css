@@ -1,0 +1,48 @@
+/* css/sidebar.css */
+.sidebar {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.filter-group input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-group button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.filter-group button#clearSearchBtn {
+    background-color: #95a5a6;
+}
+.filter-group button#clearSearchBtn:hover {
+    background-color: #7f8c8d;
+}
