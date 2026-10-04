@@ -1,36 +1,30 @@
-/* css/cards.css */
 .content {
     flex: 1;
 }
-
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
-
 .card {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: calc(33.333% - 14px); /* 3 cards per row approx */
+    width: calc(33.333% - 14px); 
     min-width: 250px;
     display: flex;
     flex-direction: column;
 }
-
 .card h3 {
     margin-bottom: 5px;
     color: #e74c3c;
 }
-
 .card .artist {
     font-weight: bold;
     color: #34495e;
     margin-bottom: 10px;
 }
-
 .card .info {
     margin-bottom: 5px;
     font-size: 14px;

@@ -1,17 +1,14 @@
-/* css/global.css */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     line-height: 1.6;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -19,12 +16,10 @@ body {
     display: flex;
     gap: 20px;
 }
-
 h2, h3, h4 {
     margin-bottom: 15px;
     color: #2c3e50;
 }
-
 button {
     cursor: pointer;
     background-color: #3498db;
@@ -35,7 +30,6 @@ button {
     font-size: 14px;
     transition: background-color 0.3s;
 }
-
 button:hover {
     background-color: #2980b9;
 }

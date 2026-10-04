@@ -1,6 +1,3 @@
-// js/dom.js
-
-// Функція для створення HTML-карточки кліпу
 function createClipCard(clip) {
     return `
         <div class="card">
@@ -11,22 +8,14 @@ function createClipCard(clip) {
         </div>
     `;
 }
-
-// Функція для рендеру всіх кліпів на сторінці
 function renderClips(clipsArray) {
     const container = document.getElementById('clipsContainer');
     if (!container) return;
-
-    // Очищаємо контейнер
     container.innerHTML = '';
-
-    // Якщо масив порожній
     if (clipsArray.length === 0) {
         container.innerHTML = '<p>Кліпів не знайдено.</p>';
         return;
     }
-
-    // Додаємо картки
     clipsArray.forEach(clip => {
         const cardHTML = createClipCard(clip);
         container.insertAdjacentHTML('beforeend', cardHTML);

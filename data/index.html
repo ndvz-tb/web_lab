@@ -17,7 +17,6 @@
             <a href="create.html">Create Clip</a>
         </nav>
     </header>
-
     <div class="container">
         <aside class="sidebar">
             <h3>Фільтри та Сортування</h3>
@@ -27,28 +26,23 @@
                 <button id="searchBtn">Шукати</button>
                 <button id="clearSearchBtn">Очистити</button>
             </div>
-            
             <div class="filter-group">
                 <label>Сортувати за переглядами:</label>
                 <button id="sortDescBtn">За спаданням (більше)</button>
                 <button id="sortAscBtn">За зростанням (менше)</button>
             </div>
-            
             <div class="filter-group">
                 <h4>Статистика</h4>
                 <p>Загальна тривалість кліпів: <span id="totalDuration">0</span> сек.</p>
                 <button id="countTotalBtn">Підрахувати</button>
             </div>
         </aside>
-
         <main class="content">
             <h2>Список кліпів</h2>
             <div id="clipsContainer" class="cards-container">
-                <!-- Картки будуть додаватись через JS -->
             </div>
         </main>
     </div>
-
     <script src="../js/dom.js"></script>
     <script src="../js/main.js"></script>
 </body>
