@@ -13,9 +13,7 @@ function hideModal() {
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const closeBtn = document.querySelector('.close-btn');
     const okBtn = document.getElementById('modalOkBtn');
-    if (closeBtn) closeBtn.addEventListener('click', hideModal);
     if (okBtn) okBtn.addEventListener('click', hideModal);
     window.addEventListener('click', (event) => {
         const modal = document.getElementById('errorModal');
