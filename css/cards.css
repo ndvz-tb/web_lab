@@ -33,3 +33,27 @@
     font-size: 14px;
     color: gray;
 }
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.card-actions .edit-btn {
+    background-color: orange;
+    flex: 1;
+}
+
+.card-actions .edit-btn:hover {
+    background-color: darkorange;
+}
+
+.card-actions .delete-btn {
+    background-color: red;
+    flex: 1;
+}
+
+.card-actions .delete-btn:hover {
+    background-color: darkred;
+}

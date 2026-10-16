@@ -1,10 +1,14 @@
 function createClipCard(clip) {
     return `
-        <div class="card">
+        <div class="card" data-id="${clip.id}">
             <h3>${clip.songTitle}</h3>
             <div class="artist">${clip.artistName}</div>
             <div class="info">Тривалість: ${clip.duration} сек.</div>
             <div class="info">Переглядів: ${clip.views}</div>
+            <div class="card-actions">
+                <button class="edit-btn" onclick="openEditModal(${clip.id})">Редагувати</button>
+                <button class="delete-btn" onclick="deleteClip(${clip.id})">Видалити</button>
+            </div>
         </div>
     `;
 }

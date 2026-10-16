@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
     <header class="header">
@@ -43,6 +44,38 @@
             </div>
         </main>
     </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content edit-modal-content">
+            <h3 class="modal-title" style="color: darkblue;">Редагувати кліп</h3>
+            <form id="editClipForm">
+                <input type="hidden" id="editClipId">
+                <div class="form-group">
+                    <label for="editArtistName">Ім'я виконавця:</label>
+                    <input type="text" id="editArtistName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSongTitle">Назва пісні:</label>
+                    <input type="text" id="editSongTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDuration">Тривалість (сек.):</label>
+                    <input type="number" id="editDuration" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="editViews">Перегляди:</label>
+                    <input type="number" id="editViews" required min="0">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="save-btn">Зберегти</button>
+                    <button type="button" id="cancelEditBtn" class="cancel-btn">Скасувати</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
     <script src="../js/dom.js"></script>
     <script src="../js/main.js"></script>
 </body>

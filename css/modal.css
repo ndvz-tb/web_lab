@@ -33,3 +33,51 @@
 .modal-ok-btn:hover {
     background-color: darkred;
 }
+
+.edit-modal-content {
+    width: 500px;
+    text-align: left;
+}
+
+.edit-modal-content .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-modal-content .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.edit-modal-content .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-actions .save-btn {
+    flex: 1;
+    background-color: limegreen;
+}
+
+.modal-actions .save-btn:hover {
+    background-color: green;
+}
+
+.modal-actions .cancel-btn {
+    flex: 1;
+    background-color: silver;
+}
+
+.modal-actions .cancel-btn:hover {
+    background-color: gray;
+}

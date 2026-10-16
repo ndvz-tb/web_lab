@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('createClipForm');
 
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const inputs = form.querySelectorAll('input');
@@ -52,9 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 views: Number(views.value)
             };
 
-            console.log(newClip);
-            alert('Успіх!');
-            form.reset();
+            try {
+                // POST request to create a new clip via REST API
+                const created = await apiCreateClip(newClip);
+                console.log('Created clip:', created);
+                alert('Кліп успішно створено!');
+                form.reset();
+            } catch (error) {
+                showModal('Помилка сервера: ' + error.message);
+            }
         });
     }
 });
