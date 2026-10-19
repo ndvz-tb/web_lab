@@ -1,3 +1,5 @@
+import { createClip } from "./api.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('createClipForm');
 
@@ -53,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // POST request to create a new clip via REST API
-                const created = await apiCreateClip(newClip);
+                const created = await createClip(newClip);
                 console.log('Created clip:', created);
                 alert('Кліп успішно створено!');
                 form.reset();

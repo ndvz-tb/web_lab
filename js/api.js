@@ -1,49 +1,63 @@
-const API_URL = 'http://localhost:3000/api/clips';
+const BASE_URL = 'http://127.0.0.1:3000/api';
+const RESOURCE_URL = `${BASE_URL}/clips`;
 
-// ===== CREATE =====
-async function apiCreateClip(clipData) {
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(clipData)
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Failed to create clip');
-    return data;
+const baseRequest = async ({urlPath = "", method = 'GET', body = null}) => {
+    try {
+        const reqParams = {
+            method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        if (body) {
+            reqParams.body = JSON.stringify(body);
+        }
+        return await fetch(`${RESOURCE_URL}${urlPath}`, reqParams);
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
-// ===== READ (all) =====
-async function apiGetClips() {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error('Failed to fetch clips');
-    return await response.json();
+export const getAllClips = async () => {
+    const rawResp = await baseRequest({method: "GET"});
+    return rawResp.json();
 }
 
-// ===== READ (one) =====
-async function apiGetClip(id) {
-    const response = await fetch(`${API_URL}/${id}`);
-    if (!response.ok) throw new Error('Clip not found');
-    return await response.json();
+export const getClipById = async (id) => {
+    const rawResp = await baseRequest({urlPath: `/${id}`, method: "GET"});
+    return rawResp.json();
 }
 
-// ===== UPDATE =====
-async function apiUpdateClip(id, clipData) {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(clipData)
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Failed to update clip');
-    return data;
+export const createClip = async (clip) => {
+    const rawResp = await baseRequest({method: "POST", body: clip});
+    return rawResp.json();
 }
 
-// ===== DELETE =====
-async function apiDeleteClip(id) {
-    const response = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE'
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Failed to delete clip');
-    return data;
+export const updateClip = async (id, clip) => {
+    const rawResp = await baseRequest({urlPath: `/${id}`, method: "PUT", body: clip});
+    return rawResp.json();
+}
+
+export const deleteClip = async (id) => {
+    const rawResp = await baseRequest({urlPath: `/${id}`, method: "DELETE"});
+    return rawResp.json();
+}
+
+// Пошук кліпів на бекенді: GET /api/clips/search?q=...
+export const searchClips = async (query) => {
+    const rawResp = await baseRequest({urlPath: `/search?q=${encodeURIComponent(query)}`, method: "GET"});
+    return rawResp.json();
+}
+
+// Кількість кліпів на бекенді: GET /api/clips/count
+export const getClipsCount = async () => {
+    const rawResp = await baseRequest({urlPath: `/count`, method: "GET"});
+    return rawResp.json();
+}
+
+// Сумарна тривалість кліпів на бекенді: GET /api/clips/total-duration
+export const getTotalDuration = async () => {
+    const rawResp = await baseRequest({urlPath: `/total-duration`, method: "GET"});
+    return rawResp.json();
 }

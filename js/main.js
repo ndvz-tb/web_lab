@@ -1,139 +1,121 @@
+import { getAllClips, deleteClip, searchClips, getClipsCount, getTotalDuration } from "./api.js";
+
 let clips = [];
-let currentClips = [];
 
-// Load clips from API on page load
+function renderView(items) {
+  renderClips(items);
+}
+
 async function loadClips() {
-    try {
-        clips = await apiGetClips();
-        currentClips = [...clips];
-        renderClips(currentClips);
-    } catch (error) {
-        console.error('Error loading clips:', error);
-        document.getElementById('clipsContainer').innerHTML =
-            '<p style="color: red;">Помилка завантаження кліпів. Переконайтеся, що сервер запущений.</p>';
+  try {
+    clips = await getAllClips();
+    renderView(clips);
+  } catch (err) {
+    console.error(err);
+    const container = document.getElementById('clipsContainer');
+    if (container) {
+      container.innerHTML = '<p style="color: red;">Помилка завантаження кліпів. Переконайтеся, що сервер запущений.</p>';
     }
+  }
 }
 
-// Delete clip via API
-async function deleteClip(id) {
-    if (!confirm('Ви впевнені, що хочете видалити цей кліп?')) return;
-    try {
-        await apiDeleteClip(id);
-        await loadClips();
-    } catch (error) {
-        alert('Помилка видалення: ' + error.message);
-    }
-}
+function initEventListeners() {
+  const searchBtn = document.getElementById('searchBtn');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const searchInput = document.getElementById('searchInput');
 
-// Open edit modal
-function openEditModal(id) {
-    const clip = currentClips.find(c => c.id === id);
-    if (!clip) return;
-
-    document.getElementById('editClipId').value = clip.id;
-    document.getElementById('editArtistName').value = clip.artistName;
-    document.getElementById('editSongTitle').value = clip.songTitle;
-    document.getElementById('editDuration').value = clip.duration;
-    document.getElementById('editViews').value = clip.views;
-
-    document.getElementById('editModal').style.display = 'block';
-}
-
-// Close edit modal
-function closeEditModal() {
-    document.getElementById('editModal').style.display = 'none';
-}
-
-// Save edited clip via API (PUT)
-async function saveEditClip(event) {
-    event.preventDefault();
-
-    const id = Number(document.getElementById('editClipId').value);
-    const clipData = {
-        artistName: document.getElementById('editArtistName').value.trim(),
-        songTitle: document.getElementById('editSongTitle').value.trim(),
-        duration: Number(document.getElementById('editDuration').value),
-        views: Number(document.getElementById('editViews').value)
-    };
-
-    try {
-        await apiUpdateClip(id, clipData);
-        closeEditModal();
-        await loadClips();
-    } catch (error) {
-        alert('Помилка оновлення: ' + error.message);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Load clips from server
-    loadClips();
-
-    // Search functionality
-    const searchBtn = document.getElementById('searchBtn');
-    const clearSearchBtn = document.getElementById('clearSearchBtn');
-    const searchInput = document.getElementById('searchInput');
-
-    if (searchBtn) {
-        searchBtn.addEventListener('click', () => {
-            const query = searchInput.value.toLowerCase().trim();
-            currentClips = clips.filter(clip =>
-                clip.songTitle.toLowerCase().includes(query) ||
-                clip.artistName.toLowerCase().includes(query)
-            );
-            renderClips(currentClips);
-        });
-    }
-    if (clearSearchBtn) {
-        clearSearchBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            currentClips = [...clips];
-            renderClips(currentClips);
-        });
-    }
-
-    // Sort functionality
-    const sortDescBtn = document.getElementById('sortDescBtn');
-    const sortAscBtn = document.getElementById('sortAscBtn');
-    if (sortDescBtn) {
-        sortDescBtn.addEventListener('click', () => {
-            currentClips.sort((a, b) => b.views - a.views);
-            renderClips(currentClips);
-        });
-    }
-    if (sortAscBtn) {
-        sortAscBtn.addEventListener('click', () => {
-            currentClips.sort((a, b) => a.views - b.views);
-            renderClips(currentClips);
-        });
-    }
-
-    // Total duration counter
-    const countTotalBtn = document.getElementById('countTotalBtn');
-    const totalDurationSpan = document.getElementById('totalDuration');
-    if (countTotalBtn) {
-        countTotalBtn.addEventListener('click', () => {
-            const total = currentClips.reduce((sum, clip) => sum + clip.duration, 0);
-            totalDurationSpan.textContent = total;
-        });
-    }
-
-    // Edit modal handlers
-    const editForm = document.getElementById('editClipForm');
-    if (editForm) {
-        editForm.addEventListener('submit', saveEditClip);
-    }
-
-    const cancelEditBtn = document.getElementById('cancelEditBtn');
-    if (cancelEditBtn) {
-        cancelEditBtn.addEventListener('click', closeEditModal);
-    }
-
-    // Close modal when clicking outside
-    window.addEventListener('click', (event) => {
-        const modal = document.getElementById('editModal');
-        if (event.target === modal) {
-            closeEditModal();
-        }
+  // Пошук через бекенд: GET /api/clips/search?q=...
+  if (searchBtn) {
+    searchBtn.addEventListener('click', async () => {
+      const query = searchInput.value.trim();
+      try {
+        const results = await searchClips(query);
+        renderView(results);
+      } catch (err) {
+        console.error(err);
+      }
     });
-});
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        try {
+          const results = await searchClips(query);
+          renderView(results);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    });
+  }
+
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', async () => {
+      searchInput.value = '';
+      await loadClips();
+    });
+  }
+
+  // Сортування (залишається на фронті — це не запит на дані)
+  const sortDescBtn = document.getElementById('sortDescBtn');
+  const sortAscBtn = document.getElementById('sortAscBtn');
+
+  if (sortDescBtn) {
+    sortDescBtn.addEventListener('click', () => {
+      const sorted = [...clips].sort((a, b) => b.views - a.views);
+      renderView(sorted);
+    });
+  }
+  if (sortAscBtn) {
+    sortAscBtn.addEventListener('click', () => {
+      const sorted = [...clips].sort((a, b) => a.views - b.views);
+      renderView(sorted);
+    });
+  }
+
+  // Підрахунок кількості кліпів через бекенд: GET /api/clips/count
+  const countTotalBtn = document.getElementById('countTotalBtn');
+  if (countTotalBtn) {
+    countTotalBtn.addEventListener('click', async () => {
+      try {
+        const countData = await getClipsCount();
+        const countEl = document.getElementById('clipsCount');
+        if (countEl) countEl.textContent = countData.count;
+
+        // Сумарна тривалість через бекенд: GET /api/clips/total-duration
+        const durationData = await getTotalDuration();
+        const totalEl = document.getElementById('totalDuration');
+        if (totalEl) totalEl.textContent = durationData.totalDuration;
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
+
+  // Event delegation for Edit and Delete buttons on cards
+  const container = document.getElementById('clipsContainer');
+  if (container) {
+    container.addEventListener('click', async (e) => {
+      if (e.target.classList.contains('delete-btn')) {
+        const id = Number(e.target.dataset.id);
+        if (!confirm('Ви впевнені, що хочете видалити цей кліп?')) return;
+        try {
+          await deleteClip(id);
+          clips = clips.filter(clip => clip.id !== id);
+          renderView(clips);
+        } catch (err) {
+          console.error(err);
+        }
+      } else if (e.target.classList.contains('edit-btn')) {
+        const id = Number(e.target.dataset.id);
+        window.location.href = `./edit.html?id=${id}`;
+      }
+    });
+  }
+}
+
+initEventListeners();
+loadClips();

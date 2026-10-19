@@ -6,8 +6,8 @@ function createClipCard(clip) {
             <div class="info">Тривалість: ${clip.duration} сек.</div>
             <div class="info">Переглядів: ${clip.views}</div>
             <div class="card-actions">
-                <button class="edit-btn" onclick="openEditModal(${clip.id})">Редагувати</button>
-                <button class="delete-btn" onclick="deleteClip(${clip.id})">Видалити</button>
+                <button class="edit-btn" data-id="${clip.id}">Редагувати</button>
+                <button class="delete-btn" data-id="${clip.id}">Видалити</button>
             </div>
         </div>
     `;
