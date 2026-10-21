@@ -1,4 +1,4 @@
-import { getAllClips, deleteClip, searchClips, getClipsCount, getTotalDuration } from "./api.js";
+import { getAllClips, deleteClip, searchClips, getClipsCount, getTotalDuration, getSortedClips } from "./api.js";
 
 let clips = [];
 
@@ -62,15 +62,23 @@ function initEventListeners() {
   const sortAscBtn = document.getElementById('sortAscBtn');
 
   if (sortDescBtn) {
-    sortDescBtn.addEventListener('click', () => {
-      const sorted = [...clips].sort((a, b) => b.views - a.views);
-      renderView(sorted);
+    sortDescBtn.addEventListener('click', async () => {
+      try {
+        const sorted = await getSortedClips('desc');
+        renderView(sorted);
+      } catch (err) {
+        console.error(err);
+      }
     });
   }
   if (sortAscBtn) {
-    sortAscBtn.addEventListener('click', () => {
-      const sorted = [...clips].sort((a, b) => a.views - b.views);
-      renderView(sorted);
+    sortAscBtn.addEventListener('click', async () => {
+      try {
+        const sorted = await getSortedClips('asc');
+        renderView(sorted);
+      } catch (err) {
+        console.error(err);
+      }
     });
   }
 

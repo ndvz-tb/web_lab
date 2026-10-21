@@ -58,7 +58,18 @@ app.get('/api/clips/total-duration', (req, res) => {
 });
 
 app.get('/api/clips', (req, res) => {
-    res.json(loadData());
+    const items = loadData();
+    const { sort, order } = req.query;
+
+    if (sort === 'views') {
+        if (order === 'asc') {
+            items.sort((a, b) => Number(a.views || 0) - Number(b.views || 0));
+        } else {
+            items.sort((a, b) => Number(b.views || 0) - Number(a.views || 0));
+        }
+    }
+
+    res.json(items);
 });
 
 app.get('/api/clips/:id', (req, res) => {

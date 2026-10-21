@@ -58,3 +58,8 @@ export const getTotalDuration = async () => {
     const rawResp = await baseRequest({urlPath: `/total-duration`, method: "GET"});
     return rawResp.json();
 }
+
+export const getSortedClips = async (order = 'desc') => {
+    const rawResp = await baseRequest({urlPath: `?sort=views&order=${order}`, method: "GET"});
+    return rawResp.json();
+}
