@@ -7,11 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const duration = document.getElementById("duration");
   const views = document.getElementById("views");
 
-  // Отримуємо id кліпа з URL (?id=...)
   const urlParams = new URLSearchParams(window.location.search);
   const clipId = urlParams.get("id");
 
-  // Завантажуємо дані кліпа з бекенду (GET /api/clips/:id)
   if (clipId) {
     try {
       const clip = await getClipById(clipId);
@@ -26,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Відправка форми: PUT /api/clips/:id
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 

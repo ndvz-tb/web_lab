@@ -24,7 +24,6 @@ function initEventListeners() {
   const clearSearchBtn = document.getElementById('clearSearchBtn');
   const searchInput = document.getElementById('searchInput');
 
-  // Пошук через бекенд: GET /api/clips/search?q=...
   if (searchBtn) {
     searchBtn.addEventListener('click', async () => {
       const query = searchInput.value.trim();
@@ -59,7 +58,6 @@ function initEventListeners() {
     });
   }
 
-  // Сортування (залишається на фронті — це не запит на дані)
   const sortDescBtn = document.getElementById('sortDescBtn');
   const sortAscBtn = document.getElementById('sortAscBtn');
 
@@ -76,7 +74,6 @@ function initEventListeners() {
     });
   }
 
-  // Підрахунок кількості кліпів через бекенд: GET /api/clips/count
   const countTotalBtn = document.getElementById('countTotalBtn');
   if (countTotalBtn) {
     countTotalBtn.addEventListener('click', async () => {
@@ -85,7 +82,6 @@ function initEventListeners() {
         const countEl = document.getElementById('clipsCount');
         if (countEl) countEl.textContent = countData.count;
 
-        // Сумарна тривалість через бекенд: GET /api/clips/total-duration
         const durationData = await getTotalDuration();
         const totalEl = document.getElementById('totalDuration');
         if (totalEl) totalEl.textContent = durationData.totalDuration;
@@ -95,7 +91,6 @@ function initEventListeners() {
     });
   }
 
-  // Event delegation for Edit and Delete buttons on cards
   const container = document.getElementById('clipsContainer');
   if (container) {
     container.addEventListener('click', async (e) => {

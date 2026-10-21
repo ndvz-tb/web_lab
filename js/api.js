@@ -44,19 +44,16 @@ export const deleteClip = async (id) => {
     return rawResp.json();
 }
 
-// Пошук кліпів на бекенді: GET /api/clips/search?q=...
 export const searchClips = async (query) => {
     const rawResp = await baseRequest({urlPath: `/search?q=${encodeURIComponent(query)}`, method: "GET"});
     return rawResp.json();
 }
 
-// Кількість кліпів на бекенді: GET /api/clips/count
 export const getClipsCount = async () => {
     const rawResp = await baseRequest({urlPath: `/count`, method: "GET"});
     return rawResp.json();
 }
 
-// Сумарна тривалість кліпів на бекенді: GET /api/clips/total-duration
 export const getTotalDuration = async () => {
     const rawResp = await baseRequest({urlPath: `/total-duration`, method: "GET"});
     return rawResp.json();
