@@ -19,8 +19,15 @@ const baseRequest = async ({urlPath = "", method = 'GET', body = null}) => {
     }
 }
 
-export const getAllClips = async () => {
-    const rawResp = await baseRequest({method: "GET"});
+export const getAllClips = async (query = "", order = "") => {
+    const params = new URLSearchParams();
+    if (query) params.append("q", query);
+    if (order) {
+        params.append("sort", "views");
+        params.append("order", order);
+    }
+    const queryString = params.toString() ? `?${params.toString()}` : "";
+    const rawResp = await baseRequest({urlPath: queryString, method: "GET"});
     return rawResp.json();
 }
 
@@ -44,22 +51,22 @@ export const deleteClip = async (id) => {
     return rawResp.json();
 }
 
-export const searchClips = async (query) => {
-    const rawResp = await baseRequest({urlPath: `/search?q=${encodeURIComponent(query)}`, method: "GET"});
+export const searchClips = async (query, order = "") => {
+    return getAllClips(query, order);
+}
+
+export const getSortedClips = async (order = 'desc', query = "") => {
+    return getAllClips(query, order);
+}
+
+export const getClipsCount = async (query = "") => {
+    const urlPath = query ? `/count?q=${encodeURIComponent(query)}` : `/count`;
+    const rawResp = await baseRequest({urlPath, method: "GET"});
     return rawResp.json();
 }
 
-export const getClipsCount = async () => {
-    const rawResp = await baseRequest({urlPath: `/count`, method: "GET"});
-    return rawResp.json();
-}
-
-export const getTotalDuration = async () => {
-    const rawResp = await baseRequest({urlPath: `/total-duration`, method: "GET"});
-    return rawResp.json();
-}
-
-export const getSortedClips = async (order = 'desc') => {
-    const rawResp = await baseRequest({urlPath: `?sort=views&order=${order}`, method: "GET"});
+export const getTotalDuration = async (query = "") => {
+    const urlPath = query ? `/total-duration?q=${encodeURIComponent(query)}` : `/total-duration`;
+    const rawResp = await baseRequest({urlPath, method: "GET"});
     return rawResp.json();
 }

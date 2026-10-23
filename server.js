@@ -31,45 +31,46 @@ function saveData(data) {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-app.get('/api/clips/search', (req, res) => {
-    const query = (req.query.q || '').toLowerCase().trim();
-    const items = loadData();
+function getFilteredAndSorted(reqQuery) {
+    let items = loadData();
+    const query = (reqQuery.q || '').toLowerCase().trim();
+    const { sort, order } = reqQuery;
 
-    if (!query) {
-        return res.json(items);
+    if (query) {
+        items = items.filter(clip =>
+            (clip.songTitle && clip.songTitle.toLowerCase().includes(query)) ||
+            (clip.artistName && clip.artistName.toLowerCase().includes(query))
+        );
     }
 
-    const filtered = items.filter(clip =>
-        (clip.songTitle && clip.songTitle.toLowerCase().includes(query)) ||
-        (clip.artistName && clip.artistName.toLowerCase().includes(query))
-    );
-    res.json(filtered);
+    if (sort === 'views' || order === 'asc' || order === 'desc') {
+        if (order === 'asc') {
+            items.sort((a, b) => Number(a.views || 0) - Number(b.views || 0));
+        } else if (order === 'desc') {
+            items.sort((a, b) => Number(b.views || 0) - Number(a.views || 0));
+        }
+    }
+
+    return items;
+}
+
+app.get('/api/clips/search', (req, res) => {
+    res.json(getFilteredAndSorted(req.query));
 });
 
 app.get('/api/clips/count', (req, res) => {
-    const items = loadData();
+    const items = getFilteredAndSorted(req.query);
     res.json({ count: items.length });
 });
 
 app.get('/api/clips/total-duration', (req, res) => {
-    const items = loadData();
+    const items = getFilteredAndSorted(req.query);
     const total = items.reduce((sum, clip) => sum + Number(clip.duration || 0), 0);
     res.json({ totalDuration: total });
 });
 
 app.get('/api/clips', (req, res) => {
-    const items = loadData();
-    const { sort, order } = req.query;
-
-    if (sort === 'views') {
-        if (order === 'asc') {
-            items.sort((a, b) => Number(a.views || 0) - Number(b.views || 0));
-        } else {
-            items.sort((a, b) => Number(b.views || 0) - Number(a.views || 0));
-        }
-    }
-
-    res.json(items);
+    res.json(getFilteredAndSorted(req.query));
 });
 
 app.get('/api/clips/:id', (req, res) => {

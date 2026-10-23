@@ -1,6 +1,8 @@
 import { getAllClips, deleteClip, searchClips, getClipsCount, getTotalDuration, getSortedClips } from "./api.js";
 
 let clips = [];
+let currentSearch = "";
+let currentOrder = "";
 
 function renderView(items) {
   renderClips(items);
@@ -8,7 +10,7 @@ function renderView(items) {
 
 async function loadClips() {
   try {
-    clips = await getAllClips();
+    clips = await getAllClips(currentSearch, currentOrder);
     renderView(clips);
   } catch (err) {
     console.error(err);
@@ -26,10 +28,10 @@ function initEventListeners() {
 
   if (searchBtn) {
     searchBtn.addEventListener('click', async () => {
-      const query = searchInput.value.trim();
+      currentSearch = searchInput.value.trim();
       try {
-        const results = await searchClips(query);
-        renderView(results);
+        clips = await searchClips(currentSearch, currentOrder);
+        renderView(clips);
       } catch (err) {
         console.error(err);
       }
@@ -40,10 +42,10 @@ function initEventListeners() {
     searchInput.addEventListener('keydown', async (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        const query = searchInput.value.trim();
+        currentSearch = searchInput.value.trim();
         try {
-          const results = await searchClips(query);
-          renderView(results);
+          clips = await searchClips(currentSearch, currentOrder);
+          renderView(clips);
         } catch (err) {
           console.error(err);
         }
@@ -54,6 +56,8 @@ function initEventListeners() {
   if (clearSearchBtn) {
     clearSearchBtn.addEventListener('click', async () => {
       searchInput.value = '';
+      currentSearch = '';
+      currentOrder = '';
       await loadClips();
     });
   }
@@ -63,9 +67,10 @@ function initEventListeners() {
 
   if (sortDescBtn) {
     sortDescBtn.addEventListener('click', async () => {
+      currentOrder = 'desc';
       try {
-        const sorted = await getSortedClips('desc');
-        renderView(sorted);
+        clips = await getSortedClips(currentOrder, currentSearch);
+        renderView(clips);
       } catch (err) {
         console.error(err);
       }
@@ -73,9 +78,10 @@ function initEventListeners() {
   }
   if (sortAscBtn) {
     sortAscBtn.addEventListener('click', async () => {
+      currentOrder = 'asc';
       try {
-        const sorted = await getSortedClips('asc');
-        renderView(sorted);
+        clips = await getSortedClips(currentOrder, currentSearch);
+        renderView(clips);
       } catch (err) {
         console.error(err);
       }
@@ -86,11 +92,11 @@ function initEventListeners() {
   if (countTotalBtn) {
     countTotalBtn.addEventListener('click', async () => {
       try {
-        const countData = await getClipsCount();
+        const countData = await getClipsCount(currentSearch);
         const countEl = document.getElementById('clipsCount');
         if (countEl) countEl.textContent = countData.count;
 
-        const durationData = await getTotalDuration();
+        const durationData = await getTotalDuration(currentSearch);
         const totalEl = document.getElementById('totalDuration');
         if (totalEl) totalEl.textContent = durationData.totalDuration;
       } catch (err) {
@@ -107,8 +113,7 @@ function initEventListeners() {
         if (!confirm('Ви впевнені, що хочете видалити цей кліп?')) return;
         try {
           await deleteClip(id);
-          clips = clips.filter(clip => clip.id !== id);
-          renderView(clips);
+          await loadClips();
         } catch (err) {
           console.error(err);
         }
