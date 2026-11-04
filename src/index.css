@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: whitesmoke;
+  color: black;
+  line-height: 1.6;
+}
+
+h2, h3, h4 {
+  margin-bottom: 15px;
+  color: darkblue;
+}
+
+button {
+  cursor: pointer;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: blue;
+}
