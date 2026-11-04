@@ -1,24 +1,17 @@
 import React from 'react';
 import PrimaryButton from '../ui/PrimaryButton/PrimaryButton';
-import SecondaryButton from '../ui/SecondaryButton/SecondaryButton';
 import './Sidebar.css';
 
-const Sidebar = ({ clipsCount = '—', totalDuration = '—', onSearch, onClear, onSortDesc, onSortAsc, onCount }) => {
+const Sidebar = ({
+  onSortDesc,
+  onSortAsc,
+  clipsCount = '—',
+  totalDuration = '—',
+  onCount
+}) => {
   return (
     <aside className="sidebar">
       <h3>Фільтри та Сортування</h3>
-
-      <div className="filter-group">
-        <label htmlFor="searchInput">Пошук за назвою або виконавцем:</label>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Введіть текст..."
-          readOnly
-        />
-        <PrimaryButton id="searchBtn" onClick={onSearch}>Шукати</PrimaryButton>
-        <SecondaryButton id="clearSearchBtn" onClick={onClear}>Очистити</SecondaryButton>
-      </div>
 
       <div className="filter-group">
         <label>Сортувати за переглядами:</label>

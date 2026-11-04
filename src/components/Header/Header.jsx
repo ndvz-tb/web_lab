@@ -20,9 +20,12 @@ const Header = () => {
         >
           Catalog
         </NavLink>
-        <a href="#create-clip" onClick={(e) => e.preventDefault()}>
+        <NavLink
+          to="/create"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
           Create Clip
-        </a>
+        </NavLink>
       </nav>
     </header>
   );

@@ -5,25 +5,7 @@
 }
 
 .home-more {
-  margin-top: 20px;
-}
-
-.home-more__box {
-  margin-top: 15px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: white;
-}
-
-.home-more__title {
-  font-size: 18px;
-  color: darkblue;
-  margin-bottom: 8px;
-}
-
-.home-more__text {
-  font-size: 14px;
-  color: black;
-  line-height: 1.5;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
 }
