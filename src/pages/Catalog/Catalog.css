@@ -1,0 +1,41 @@
+.catalog-page {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.catalog-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-bottom: 24px;
+}
+
+.catalog-search {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.catalog-search__label {
+  font-size: 14px;
+  font-weight: bold;
+  color: darkblue;
+}
+
+.catalog-search__input {
+  width: 100%;
+  height: 36px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+}

@@ -1,7 +1,9 @@
 import React from 'react';
+import PrimaryButton from '../ui/PrimaryButton/PrimaryButton';
+import SecondaryButton from '../ui/SecondaryButton/SecondaryButton';
 import './Sidebar.css';
 
-const Sidebar = ({ clipsCount = '—', totalDuration = '—' }) => {
+const Sidebar = ({ clipsCount = '—', totalDuration = '—', onSearch, onClear, onSortDesc, onSortAsc, onCount }) => {
   return (
     <aside className="sidebar">
       <h3>Фільтри та Сортування</h3>
@@ -14,21 +16,21 @@ const Sidebar = ({ clipsCount = '—', totalDuration = '—' }) => {
           placeholder="Введіть текст..."
           readOnly
         />
-        <button type="button" id="searchBtn">Шукати</button>
-        <button type="button" id="clearSearchBtn">Очистити</button>
+        <PrimaryButton id="searchBtn" onClick={onSearch}>Шукати</PrimaryButton>
+        <SecondaryButton id="clearSearchBtn" onClick={onClear}>Очистити</SecondaryButton>
       </div>
 
       <div className="filter-group">
         <label>Сортувати за переглядами:</label>
-        <button type="button" id="sortDescBtn">За спаданням (більше)</button>
-        <button type="button" id="sortAscBtn">За зростанням (менше)</button>
+        <PrimaryButton id="sortDescBtn" onClick={onSortDesc}>За спаданням (більше)</PrimaryButton>
+        <PrimaryButton id="sortAscBtn" onClick={onSortAsc}>За зростанням (менше)</PrimaryButton>
       </div>
 
       <div className="filter-group">
         <h4>Статистика</h4>
         <p>Кількість кліпів: <span id="clipsCount">{clipsCount}</span></p>
         <p>Загальна тривалість кліпів: <span id="totalDuration">{totalDuration}</span> сек.</p>
-        <button type="button" id="countTotalBtn">Підрахувати</button>
+        <PrimaryButton id="countTotalBtn" onClick={onCount}>Підрахувати</PrimaryButton>
       </div>
     </aside>
   );

@@ -1,0 +1,23 @@
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.select-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: darkblue;
+}
+
+.select-control {
+  width: 100%;
+  height: 36px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}

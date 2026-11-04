@@ -1,0 +1,14 @@
+.primary-btn {
+  cursor: pointer;
+  background-color: dodgerblue;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.primary-btn:hover {
+  background-color: blue;
+}

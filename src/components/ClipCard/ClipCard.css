@@ -25,14 +25,21 @@
 }
 
 .card-actions {
-  margin-top: 10px;
+  margin-top: auto;
+  padding-top: 10px;
   display: flex;
   gap: 8px;
+}
+
+.card-link {
+  flex: 1;
+  text-decoration: none;
 }
 
 .card-actions .edit-btn {
   background-color: orange;
   flex: 1;
+  width: 100%;
 }
 
 .card-actions .edit-btn:hover {
