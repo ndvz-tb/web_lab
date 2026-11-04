@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clips - View Page</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/cards.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ClipsApp</div>
+        <nav class="nav">
+            <a href="index.html" class="active">View Clips</a>
+            <a href="create.html">Create Clip</a>
+        </nav>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Фільтри та Сортування</h3>
+            <div class="filter-group">
+                <label for="searchInput">Пошук за назвою або виконавцем:</label>
+                <input type="text" id="searchInput" placeholder="Введіть текст...">
+                <button id="searchBtn">Шукати</button>
+                <button id="clearSearchBtn">Очистити</button>
+            </div>
+            <div class="filter-group">
+                <label>Сортувати за переглядами:</label>
+                <button id="sortDescBtn">За спаданням (більше)</button>
+                <button id="sortAscBtn">За зростанням (менше)</button>
+            </div>
+            <div class="filter-group">
+                <h4>Статистика</h4>
+                <p>Загальна тривалість кліпів: <span id="totalDuration">0</span> сек.</p>
+                <button id="countTotalBtn">Підрахувати</button>
+            </div>
+        </aside>
+        <main class="content">
+            <h2>Список кліпів</h2>
+            <div id="clipsContainer" class="cards-container">
+            </div>
+        </main>
+    </div>
+    <script src="../js/dom.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
