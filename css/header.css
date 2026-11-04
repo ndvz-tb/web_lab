@@ -1,0 +1,26 @@
+.header {
+    background-color: darkblue;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.header .nav a:hover,
+.header .nav a.active {
+    background-color: steelblue;
+}

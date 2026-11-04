@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "artistName": "The Beatles",
+    "songTitle": "Let It Be",
+    "duration": 243,
+    "views": 150000000
+  },
+  {
+    "id": 2,
+    "artistName": "Queen",
+    "songTitle": "Bohemian Rhapsody",
+    "duration": 354,
+    "views": 1600000000
+  },
+  {
+    "id": 3,
+    "artistName": "Nirvana",
+    "songTitle": "Smells Like Teen Spirit",
+    "duration": 278,
+    "views": 1700000000
+  },
+  {
+    "id": 4,
+    "artistName": "Michael Jackson",
+    "songTitle": "Billie Jean",
+    "duration": 294,
+    "views": 1400000000
+  },
+  {
+    "id": 5,
+    "artistName": "Океан Ельзи",
+    "songTitle": "Без бою",
+    "duration": 260,
+    "views": 45000000
+  }
+]
