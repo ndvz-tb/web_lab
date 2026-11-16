@@ -5,8 +5,13 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__container">
-        <span>ClipsApp - Music Clips Management</span>
-        <span>© {new Date().getFullYear()} ClipsApp</span>
+        <div className="footer__brand">ClipsApp</div>
+        <p className="footer__desc">
+          Платформа для перегляду, пошуку та організації культових музичних відеокліпів.
+        </p>
+        <div className="footer__copy">
+          © {new Date().getFullYear()} ClipsApp. All rights reserved.
+        </div>
       </div>
     </footer>
   );

@@ -1,14 +1,19 @@
 .secondary-btn {
   cursor: pointer;
-  background-color: silver;
-  color: white;
-  border: none;
-  padding: 10px 15px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #b5b5b5;
+  padding: 9px 16px;
   border-radius: 4px;
   font-size: 14px;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: background-color 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .secondary-btn:hover {
-  background-color: gray;
+  background-color: #f3f4f6;
+  border-color: #888888;
 }

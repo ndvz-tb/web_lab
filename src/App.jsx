@@ -15,14 +15,14 @@ function App() {
       <BrowserRouter>
         <div className="app">
           <Header />
-          <div className="app-content">
+          <main className="app__content">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/catalog" element={<Catalog />} />
               <Route path="/create" element={<CreateClip />} />
               <Route path="/item/:id" element={<ItemPage />} />
             </Routes>
-          </div>
+          </main>
           <Footer />
         </div>
       </BrowserRouter>

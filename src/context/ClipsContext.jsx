@@ -14,7 +14,8 @@ export const ClipsProvider = ({ children }) => {
       genre: data.genre || 'rock',
       duration: Number(data.duration),
       views: Number(data.views),
-      description: data.description
+      description: data.description,
+      image: data.image || '/images/clip-default.jpg'
     };
     setClips([...clips, newItem]);
   };

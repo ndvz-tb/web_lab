@@ -13,33 +13,50 @@ const ItemPage = () => {
   if (!clip) {
     return (
       <div className="item-container">
-        <div className="card">
-          <h3>Кліп не знайдено</h3>
-          <div className="card-actions">
-            <Link to="/catalog" className="card-link">
-              <PrimaryButton>Back to Catalog</PrimaryButton>
-            </Link>
+        <article className="card">
+          <div className="card__body">
+            <h2 className="card__title">Кліп не знайдено</h2>
+            <div className="card__actions">
+              <Link to="/catalog" className="card__link">
+                <PrimaryButton className="btn-card-view">Back to Catalog</PrimaryButton>
+              </Link>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
     );
   }
 
   return (
     <div className="item-container">
-      <div className="card">
-        <h2>{clip.songTitle}</h2>
-        <div className="artist">Виконавець: {clip.artistName}</div>
-        <p className="item-desc">{clip.description}</p>
-        <div className="info"><strong>Жанр:</strong> {clip.genre}</div>
-        <div className="info"><strong>Тривалість:</strong> {clip.duration} сек.</div>
-        <div className="info"><strong>Переглядів:</strong> {clip.views}</div>
-        <div className="card-actions">
-          <Link to="/catalog" className="card-link">
-            <PrimaryButton className="edit-btn">Back to Catalog</PrimaryButton>
-          </Link>
+      <article className="card">
+        <div className="card__image item-image">
+          <img
+            src={clip.image || '/images/clip-default.jpg'}
+            alt={clip.songTitle}
+            className="card__img"
+          />
         </div>
-      </div>
+
+        <div className="card__body">
+          <h1 className="card__title">{clip.songTitle}</h1>
+          <div className="card__artist">{clip.artistName}</div>
+          <p className="card__desc">{clip.description}</p>
+          <p className="card__specs">
+            <strong>Жанр:</strong> {clip.genre}
+            <br />
+            <strong>Тривалість:</strong> {clip.duration} сек.
+            <br />
+            <strong>Переглядів:</strong> {Number(clip.views).toLocaleString('uk-UA')}
+          </p>
+
+          <div className="card__actions">
+            <Link to="/catalog" className="card__link">
+              <PrimaryButton className="btn-card-view">Back to Catalog</PrimaryButton>
+            </Link>
+          </div>
+        </div>
+      </article>
     </div>
   );
 };

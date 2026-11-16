@@ -4,9 +4,6 @@
   padding: 0 16px;
 }
 
-.item-desc {
-  margin-bottom: 12px;
-  color: black;
-  font-size: 15px;
-  line-height: 1.5;
+.item-image {
+  height: 240px;
 }

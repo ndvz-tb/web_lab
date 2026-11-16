@@ -62,9 +62,23 @@ const Catalog = () => {
 
   return (
     <div className="catalog-page">
-      <h2>Каталог кліпів</h2>
+      <aside className="catalog-sidebar">
+        <h2 className="catalog-sidebar__title">Фільтри каталогу</h2>
 
-      <div className="catalog-filters">
+        <div className="catalog-search">
+          <label htmlFor="catalog-search-input" className="catalog-search__label">
+            Пошук за назвою або описом
+          </label>
+          <input
+            id="catalog-search-input"
+            type="text"
+            className="catalog-search__input"
+            placeholder="Введіть текст..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
         <Select
           id="genre-select"
           label="Жанр"
@@ -81,34 +95,31 @@ const Catalog = () => {
           onChange={(e) => setDurationRange(e.target.value)}
         />
 
-        <div className="catalog-search">
-          <label htmlFor="catalog-search-input" className="catalog-search__label">
-            Пошук за назвою або описом
-          </label>
-          <input
-            id="catalog-search-input"
-            type="text"
-            className="catalog-search__input"
-            placeholder="Введіть текст..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        <div className="catalog-sidebar__actions">
+          <SecondaryButton className="catalog-reset__btn" onClick={handleReset}>
+            Очистити фільтри
+          </SecondaryButton>
+        </div>
+      </aside>
+
+      <main className="catalog-content">
+        <div className="catalog-header">
+          <h1 className="catalog-title">Каталог кліпів</h1>
+          <span className="catalog-count">
+            Знайдено: {filteredClips.length}
+          </span>
         </div>
 
-        <div className="catalog-reset">
-          <SecondaryButton onClick={handleReset}>Очистити</SecondaryButton>
+        <div className="cards-grid">
+          {filteredClips.length === 0 ? (
+            <div className="cards-empty">Кліпів за обраними фільтрами не знайдено.</div>
+          ) : (
+            filteredClips.map((clip) => (
+              <ClipCard key={clip.id} clip={clip} />
+            ))
+          )}
         </div>
-      </div>
-
-      <div className="cards-container">
-        {filteredClips.length === 0 ? (
-          <p>Кліпів за обраними фільтрами не знайдено.</p>
-        ) : (
-          filteredClips.map((clip) => (
-            <ClipCard key={clip.id} clip={clip} />
-          ))
-        )}
-      </div>
+      </main>
     </div>
   );
 };
