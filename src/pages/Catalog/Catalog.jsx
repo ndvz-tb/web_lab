@@ -23,9 +23,22 @@ const Catalog = () => {
 
   return (
     <div className="catalog-page">
-      <h2>Каталог кліпів</h2>
+      <aside className="catalog-sidebar">
+        <h2 className="catalog-sidebar__title">Фільтри каталогу</h2>
 
-      <div className="catalog-filters">
+        <div className="catalog-search">
+          <label htmlFor="catalog-search-input" className="catalog-search__label">
+            Пошук за назвою або описом
+          </label>
+          <input
+            id="catalog-search-input"
+            type="text"
+            className="catalog-search__input"
+            placeholder="Введіть текст..."
+            readOnly
+          />
+        </div>
+
         <Select
           id="genre-select"
           label="Жанр"
@@ -38,29 +51,27 @@ const Catalog = () => {
           options={durationOptions}
         />
 
-        <div className="catalog-search">
-          <label htmlFor="catalog-search-input" className="catalog-search__label">
-            Пошук за назвою або виконавцем
-          </label>
-          <input
-            id="catalog-search-input"
-            type="text"
-            className="catalog-search__input"
-            placeholder="Введіть текст..."
-            readOnly
-          />
+        <div className="catalog-sidebar__actions">
+          <SecondaryButton className="catalog-reset__btn">
+            Очистити фільтри
+          </SecondaryButton>
+        </div>
+      </aside>
+
+      <main className="catalog-content">
+        <div className="catalog-header">
+          <h1 className="catalog-title">Каталог кліпів</h1>
+          <span className="catalog-count">
+            Усього: {INITIAL_CLIPS.length}
+          </span>
         </div>
 
-        <div className="catalog-reset">
-          <SecondaryButton>Очистити</SecondaryButton>
+        <div className="cards-grid">
+          {INITIAL_CLIPS.map((clip) => (
+            <ClipCard key={clip.id} clip={clip} />
+          ))}
         </div>
-      </div>
-
-      <div className="cards-container">
-        {INITIAL_CLIPS.map((clip) => (
-          <ClipCard key={clip.id} clip={clip} />
-        ))}
-      </div>
+      </main>
     </div>
   );
 };

@@ -4,18 +4,12 @@ import './Footer.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-brand">
-          <span className="footer-logo">ClipsApp</span>
-          <span className="footer-desc">
-            Music Clips Management & Catalog Application
-          </span>
-        </div>
-        <nav className="footer-nav">
-          <a href="#view-clips" className="footer-link">View Clips</a>
-          <a href="#create-clip" className="footer-link">Create Clip</a>
-        </nav>
-        <div className="footer-copyright">
+      <div className="footer__container">
+        <div className="footer__brand">ClipsApp</div>
+        <p className="footer__desc">
+          Платформа для перегляду, пошуку та організації культових музичних відеокліпів.
+        </p>
+        <div className="footer__copy">
           © {new Date().getFullYear()} ClipsApp. All rights reserved.
         </div>
       </div>

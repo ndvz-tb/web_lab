@@ -5,28 +5,17 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: whitesmoke;
-  color: black;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #ffffff;
+  color: #111111;
+  line-height: 1.5;
 }
 
-h2, h3, h4 {
-  margin-bottom: 15px;
-  color: darkblue;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-  cursor: pointer;
-  background-color: dodgerblue;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: blue;
+  font-family: inherit;
 }
