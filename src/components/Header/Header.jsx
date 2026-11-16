@@ -30,7 +30,7 @@ const Header = () => {
           className="header__nav-item header__nav-btn"
           onClick={(e) => e.preventDefault()}
         >
-          Create Clip
+          Create
         </button>
       </nav>
 
@@ -50,14 +50,14 @@ const Header = () => {
         </a>
 
         <a
-          href="https://youtube.com"
+          href="https://twitter.com"
           target="_blank"
           rel="noreferrer"
           className="header__social-link"
-          aria-label="YouTube"
+          aria-label="Twitter"
         >
           <svg className="header__social-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" />
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
         </a>
 

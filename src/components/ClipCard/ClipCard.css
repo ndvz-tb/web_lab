@@ -1,21 +1,17 @@
 .card {
-  border: 1px solid #d5d5d5;
-  border-radius: 6px;
+  border: 1px solid #b5b5b5;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-
-.card:hover {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 .card__image {
   background-color: #eeeeee;
-  height: 190px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   position: relative;
 }
@@ -36,36 +32,36 @@
 }
 
 .card__title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #111111;
-  margin-bottom: 4px;
-}
-
-.card__artist {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2a8dae;
   margin-bottom: 8px;
 }
 
 .card__desc {
   font-size: 13.5px;
   line-height: 1.45;
-  color: #444444;
+  color: #333333;
   margin-bottom: 12px;
-  min-height: 42px;
+  min-height: 58px;
 }
 
 .card__specs {
   font-size: 13px;
-  color: #555555;
+  color: #444444;
   line-height: 1.5;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  min-height: 40px;
 }
 
 .card__specs strong {
   color: #111111;
+}
+
+.card__updated {
+  font-size: 12.5px;
+  color: #888888;
+  margin-bottom: 16px;
 }
 
 .card__actions {
@@ -81,30 +77,43 @@
   text-decoration: none;
 }
 
-.btn-card-view {
+.btn-card-edit {
   flex: 1;
   width: 100%;
-  height: 36px;
-  padding: 0 12px;
-  font-size: 13.5px;
-  background-color: #2a8dae;
-  color: #ffffff;
+  height: 34px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #50b6dc !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 4px;
 }
 
-.btn-card-view:hover {
-  background-color: #21738f;
+.btn-card-edit:hover {
+  background-color: #3fa5cb !important;
 }
 
 .btn-card-remove {
   flex: 1;
-  height: 36px;
-  padding: 0 12px;
-  font-size: 13.5px;
-  background-color: #d3514d;
-  color: #ffffff;
-  border: none;
+  height: 34px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d3514d !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 4px;
 }
 
 .btn-card-remove:hover {
-  background-color: #b93d39;
+  background-color: #bd433f !important;
 }

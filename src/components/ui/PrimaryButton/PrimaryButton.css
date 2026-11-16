@@ -1,6 +1,6 @@
 .primary-btn {
   cursor: pointer;
-  background-color: #2a8dae;
+  background-color: #007bff;
   color: #ffffff;
   border: none;
   padding: 10px 18px;
@@ -14,5 +14,5 @@
 }
 
 .primary-btn:hover {
-  background-color: #21738f;
+  background-color: #0069d9;
 }
