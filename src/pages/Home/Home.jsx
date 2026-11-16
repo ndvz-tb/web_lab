@@ -40,11 +40,11 @@ const Home = () => {
       <section className="home-hero">
         <div className="home-hero__content">
           <h1 className="home-hero__title">
-            Відкривай культові музичні кліпи
+            Admire Classic Music &amp; Clips
           </h1>
           <p className="home-hero__desc">
-            Найкращі рок-балади, гранж, поп-ікони та українська музика в одній
-            колекції. Досліджуйте класичні відеокліпи та сучасні хіти у зручному каталозі.
+            Культові музичні відеокліпи різних епох і жанрів — від світової
+            рок-класики до українських хітів. Обирайте улюблені композиції.
           </p>
           <div className="home-hero__actions">
             <PrimaryButton
@@ -68,14 +68,13 @@ const Home = () => {
       <section className="home-categories">
         <div className="category-card category-card--large">
           <div className="category-card__top">
-            <div className="category-card__badge">Popular • Rock & Grunge</div>
+            <div className="category-card__badge">Popular • Rock</div>
             <h2 className="category-card__title">Рок та гранж легенди</h2>
             <p className="category-card__models">
-              Queen • Nirvana • The Beatles • Linkin Park • Metallica
+              Queen • Nirvana • Linkin Park
             </p>
             <p className="category-card__desc">
-              Енергійні гітарні рифи, культові відеокліпи та світова класика, що
-              змінила історію сучасної музики.
+              Класичні відеокліпи та культові гітарні рифи світової сцени.
             </p>
           </div>
           <div className="category-card__media">
@@ -86,13 +85,13 @@ const Home = () => {
         <div className="category-column">
           <div className="category-card category-card--horizontal">
             <div className="category-card__info">
-              <div className="category-card__badge">Trending • Pop</div>
+              <div className="category-card__badge">Pop</div>
               <h3 className="category-card__title">Поп та синті-хіти</h3>
               <p className="category-card__models">
                 Michael Jackson • The Weeknd
               </p>
               <p className="category-card__desc">
-                Яскрава хореографія, неонова естетика та мільярди переглядів у всьому світі.
+                Яскраві відеокліпи з мільярдами переглядів.
               </p>
             </div>
             <div className="category-card__media category-card__media--small">
@@ -108,7 +107,7 @@ const Home = () => {
                 Океан Ельзи • Скрябін • Бумбокс
               </p>
               <p className="category-card__desc">
-                Рідні композиції, що об'єднують покоління — від теплої лірики до стадіонного року.
+                Рідні композиції, що об'єднують покоління.
               </p>
             </div>
             <div className="category-card__media category-card__media--small">
@@ -142,9 +141,7 @@ const Home = () => {
                     alt={clip.songTitle}
                   />
                 </div>
-                <span className="home-strip__name">
-                  {clip.artistName} — {clip.songTitle}
-                </span>
+                <span className="home-strip__name">{clip.songTitle}</span>
               </Link>
             ))}
           </div>
@@ -173,9 +170,6 @@ const Home = () => {
       <section className="home-featured" id="you-may-like">
         <div className="home-featured__header">
           <h2 className="home-featured__title">You may like</h2>
-          <Link to="/catalog" className="home-featured__catalog-link">
-            Увесь каталог →
-          </Link>
         </div>
 
         <div className="home-featured__grid">

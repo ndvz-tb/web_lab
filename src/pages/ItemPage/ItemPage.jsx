@@ -18,7 +18,7 @@ const ItemPage = () => {
             <h2 className="card__title">Кліп не знайдено</h2>
             <div className="card__actions">
               <Link to="/catalog" className="card__link">
-                <PrimaryButton className="btn-card-view">Back to Catalog</PrimaryButton>
+                <PrimaryButton className="btn-card-edit">Back to Catalog</PrimaryButton>
               </Link>
             </div>
           </div>
@@ -40,19 +40,19 @@ const ItemPage = () => {
 
         <div className="card__body">
           <h1 className="card__title">{clip.songTitle}</h1>
-          <div className="card__artist">{clip.artistName}</div>
           <p className="card__desc">{clip.description}</p>
           <p className="card__specs">
+            <strong>Виконавець:</strong> {clip.artistName}
+            <br />
             <strong>Жанр:</strong> {clip.genre}
             <br />
-            <strong>Тривалість:</strong> {clip.duration} сек.
-            <br />
-            <strong>Переглядів:</strong> {Number(clip.views).toLocaleString('uk-UA')}
+            <strong>Тривалість:</strong> {clip.duration} сек. | <strong>Перегляди:</strong> {Number(clip.views).toLocaleString('uk-UA')}
           </p>
+          <div className="card__updated">Last updated 3 mins ago</div>
 
           <div className="card__actions">
             <Link to="/catalog" className="card__link">
-              <PrimaryButton className="btn-card-view">Back to Catalog</PrimaryButton>
+              <PrimaryButton className="btn-card-edit">Back to Catalog</PrimaryButton>
             </Link>
           </div>
         </div>

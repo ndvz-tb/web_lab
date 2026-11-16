@@ -21,21 +21,21 @@ const ClipCard = ({ clip, showRemove = true, withLink = true }) => {
 
       <div className="card__body">
         <h3 className="card__title">{songTitle}</h3>
-        <div className="card__artist">{artistName}</div>
         <p className="card__desc">{description}</p>
         <p className="card__specs">
-          <strong>Тривалість:</strong> {duration} сек.
+          <strong>Виконавець:</strong> {artistName}
           <br />
-          <strong>Переглядів:</strong> {Number(views).toLocaleString('uk-UA')}
+          <strong>Тривалість:</strong> {duration} сек. | <strong>Перегляди:</strong> {Number(views).toLocaleString('uk-UA')}
         </p>
+        <div className="card__updated">Last updated 3 mins ago</div>
 
         <div className="card__actions">
           {withLink ? (
             <Link to={`/item/${id}`} className="card__link">
-              <PrimaryButton className="btn-card-view">View more</PrimaryButton>
+              <PrimaryButton className="btn-card-edit">View more</PrimaryButton>
             </Link>
           ) : (
-            <PrimaryButton className="btn-card-view">View more</PrimaryButton>
+            <PrimaryButton className="btn-card-edit">View more</PrimaryButton>
           )}
 
           {showRemove && (
