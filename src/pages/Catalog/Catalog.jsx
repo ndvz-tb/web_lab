@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ClipCard from '../../components/ClipCard/ClipCard';
 import SecondaryButton from '../../components/ui/SecondaryButton/SecondaryButton';
 import Select from '../../components/ui/Select/Select';
+import Loader from '../../components/ui/Loader/Loader';
+import { getClips } from '../../api/clipsApi';
 import { useClips } from '../../context/ClipsContext';
 import './Catalog.css';
 
 const Catalog = () => {
-  const { clips } = useClips();
+  const { removeClip } = useClips();
   const [genre, setGenre] = useState('all');
   const [durationRange, setDurationRange] = useState('all');
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+
+  const [catalogClips, setCatalogClips] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const genreOptions = [
     { value: 'all', label: 'Усі жанри' },
@@ -26,38 +33,61 @@ const Catalog = () => {
     { value: 'long', label: 'Понад 300 сек.' }
   ];
 
-  const filteredClips = clips.filter((item) => {
-    if (genre !== 'all' && item.genre !== genre) {
-      return false;
-    }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 250);
 
-    if (durationRange === 'short' && item.duration > 260) {
-      return false;
-    }
-    if (durationRange === 'medium' && (item.duration <= 260 || item.duration > 300)) {
-      return false;
-    }
-    if (durationRange === 'long' && item.duration <= 300) {
-      return false;
-    }
+    return () => clearTimeout(timer);
+  }, [search]);
 
-    if (search.trim() !== '') {
-      const q = search.trim().toLowerCase();
-      const matchTitle = item.songTitle.toLowerCase().includes(q);
-      const matchArtist = item.artistName.toLowerCase().includes(q);
-      const matchDesc = (item.description || '').toLowerCase().includes(q);
-      if (!matchTitle && !matchArtist && !matchDesc) {
-        return false;
+  useEffect(() => {
+    let isCancelled = false;
+
+    const fetchCatalog = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const data = await getClips({
+          genre,
+          duration: durationRange,
+          q: debouncedSearch
+        });
+        if (!isCancelled) {
+          setCatalogClips(data);
+        }
+      } catch (err) {
+        if (!isCancelled) {
+          setError('Не вдалося завантажити кліпи з сервера. Перевірте запуск API.');
+        }
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
       }
-    }
+    };
 
-    return true;
-  });
+    fetchCatalog();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [genre, durationRange, debouncedSearch]);
 
   const handleReset = () => {
     setGenre('all');
     setDurationRange('all');
     setSearch('');
+    setDebouncedSearch('');
+  };
+
+  const handleRemoveClip = async (id) => {
+    try {
+      await removeClip(id);
+      setCatalogClips((prev) => prev.filter((item) => item.id !== Number(id)));
+    } catch (err) {
+      setError('Не вдалося видалити кліп.');
+    }
   };
 
   return (
@@ -106,19 +136,29 @@ const Catalog = () => {
         <div className="catalog-header">
           <h1 className="catalog-title">Каталог кліпів</h1>
           <span className="catalog-count">
-            Знайдено: {filteredClips.length}
+            Знайдено: {loading ? '...' : catalogClips.length}
           </span>
         </div>
 
-        <div className="cards-grid">
-          {filteredClips.length === 0 ? (
-            <div className="cards-empty">Кліпів за обраними фільтрами не знайдено.</div>
-          ) : (
-            filteredClips.map((clip) => (
-              <ClipCard key={clip.id} clip={clip} />
-            ))
-          )}
-        </div>
+        {loading ? (
+          <Loader text="Завантаження каталогу..." />
+        ) : error ? (
+          <div className="cards-empty">{error}</div>
+        ) : (
+          <div className="cards-grid">
+            {catalogClips.length === 0 ? (
+              <div className="cards-empty">Кліпів за обраними фільтрами не знайдено.</div>
+            ) : (
+              catalogClips.map((clip) => (
+                <ClipCard
+                  key={clip.id}
+                  clip={clip}
+                  onRemove={handleRemoveClip}
+                />
+              ))
+            )}
+          </div>
+        )}
       </main>
     </div>
   );

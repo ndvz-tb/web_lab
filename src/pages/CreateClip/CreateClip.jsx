@@ -16,6 +16,7 @@ const CreateClip = () => {
   const [views, setViews] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const genreOptions = [
     { value: 'rock', label: 'Рок' },
@@ -24,7 +25,7 @@ const CreateClip = () => {
     { value: 'ukrainian', label: 'Українська музика' }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (songTitle.trim().length < 2 || artistName.trim().length < 2 || !duration || !views) {
@@ -32,16 +33,25 @@ const CreateClip = () => {
       return;
     }
 
-    addClip({
-      songTitle: songTitle.trim(),
-      artistName: artistName.trim(),
-      genre,
-      duration: Number(duration),
-      views: Number(views),
-      description: description.trim() || 'Музичний відеокліп.'
-    });
+    setSubmitting(true);
+    setError('');
 
-    navigate('/catalog');
+    try {
+      await addClip({
+        songTitle: songTitle.trim(),
+        artistName: artistName.trim(),
+        genre,
+        duration: Number(duration),
+        views: Number(views),
+        description: description.trim() || 'Музичний відеокліп.'
+      });
+
+      navigate('/catalog');
+    } catch (err) {
+      setError('Не вдалося зберегти кліп на сервері. Перевірте запуск API.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -118,8 +128,8 @@ const CreateClip = () => {
 
         {error && <div className="form-alert">{error}</div>}
 
-        <PrimaryButton type="submit" className="btn-submit">
-          Створити
+        <PrimaryButton type="submit" className="btn-submit" disabled={submitting}>
+          {submitting ? 'Створення...' : 'Створити'}
         </PrimaryButton>
 
         <Link to="/catalog" className="btn-back">

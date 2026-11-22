@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ClipCard from '../../components/ClipCard/ClipCard';
 import PrimaryButton from '../../components/ui/PrimaryButton/PrimaryButton';
+import Loader from '../../components/ui/Loader/Loader';
 import { useClips } from '../../context/ClipsContext';
 import './Home.css';
 
 const Home = () => {
-  const { clips } = useClips();
+  const { clips, loading, error } = useClips();
   const [showMore, setShowMore] = useState(false);
   const [stripIndex, setStripIndex] = useState(0);
 
@@ -117,80 +118,88 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="home-strip">
-        <div className="home-strip__carousel">
-          <button
-            type="button"
-            className="home-strip__arrow"
-            onClick={handlePrevStrip}
-            aria-label="Previous"
-          >
-            &#8249;
-          </button>
-
-          <div className="home-strip__items">
-            {visibleStripItems.map((clip) => (
-              <Link
-                key={clip.id}
-                to={`/item/${clip.id}`}
-                className="home-strip__item"
+      {loading ? (
+        <Loader text="Завантаження кліпів..." />
+      ) : error ? (
+        <div className="cards-empty">{error}</div>
+      ) : (
+        <>
+          <section className="home-strip">
+            <div className="home-strip__carousel">
+              <button
+                type="button"
+                className="home-strip__arrow"
+                onClick={handlePrevStrip}
+                aria-label="Previous"
               >
-                <div className="home-strip__img-box">
-                  <img
-                    src={clip.image || '/images/clip-default.jpg'}
-                    alt={clip.songTitle}
-                  />
-                </div>
-                <span className="home-strip__name">{clip.songTitle}</span>
-              </Link>
-            ))}
-          </div>
+                &#8249;
+              </button>
 
-          <button
-            type="button"
-            className="home-strip__arrow"
-            onClick={handleNextStrip}
-            aria-label="Next"
-          >
-            &#8250;
-          </button>
-        </div>
+              <div className="home-strip__items">
+                {visibleStripItems.map((clip) => (
+                  <Link
+                    key={clip.id}
+                    to={`/item/${clip.id}`}
+                    className="home-strip__item"
+                  >
+                    <div className="home-strip__img-box">
+                      <img
+                        src={clip.image || '/images/clip-default.jpg'}
+                        alt={clip.songTitle}
+                      />
+                    </div>
+                    <span className="home-strip__name">{clip.songTitle}</span>
+                  </Link>
+                ))}
+              </div>
 
-        <div className="home-strip__dots">
-          {Array.from({ length: maxStripIndex + 1 }).map((_, idx) => (
-            <span
-              key={idx}
-              className={`home-strip__dot ${idx === stripIndex ? 'active' : ''}`}
-              onClick={() => setStripIndex(idx)}
-            />
-          ))}
-        </div>
-      </section>
+              <button
+                type="button"
+                className="home-strip__arrow"
+                onClick={handleNextStrip}
+                aria-label="Next"
+              >
+                &#8250;
+              </button>
+            </div>
 
-      <section className="home-featured" id="you-may-like">
-        <div className="home-featured__header">
-          <h2 className="home-featured__title">You may like</h2>
-        </div>
+            <div className="home-strip__dots">
+              {Array.from({ length: maxStripIndex + 1 }).map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`home-strip__dot ${idx === stripIndex ? 'active' : ''}`}
+                  onClick={() => setStripIndex(idx)}
+                />
+              ))}
+            </div>
+          </section>
 
-        <div className="home-featured__grid">
-          {displayedClips.map((clip) => (
-            <ClipCard
-              key={clip.id}
-              clip={clip}
-              showRemove={false}
-              withLink={true}
-            />
-          ))}
-        </div>
+          <section className="home-featured" id="you-may-like">
+            <div className="home-featured__header">
+              <h2 className="home-featured__title">You may like</h2>
+            </div>
 
-        {clips.length > 3 && (
-          <div className="home-more">
-            <PrimaryButton onClick={() => setShowMore(!showMore)}>
-              {showMore ? 'Show less' : 'Show more'}
-            </PrimaryButton>
-          </div>
-        )}
-      </section>
+            <div className="home-featured__grid">
+              {displayedClips.map((clip) => (
+                <ClipCard
+                  key={clip.id}
+                  clip={clip}
+                  showRemove={false}
+                  withLink={true}
+                />
+              ))}
+            </div>
+
+            {clips.length > 3 && (
+              <div className="home-more">
+                <PrimaryButton onClick={() => setShowMore(!showMore)}>
+                  {showMore ? 'Show less' : 'Show more'}
+                </PrimaryButton>
+              </div>
+            )}
+          </section>
+        </>
+      )}
     </div>
   );
 };

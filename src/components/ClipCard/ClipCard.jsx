@@ -5,9 +5,17 @@ import SecondaryButton from '../ui/SecondaryButton/SecondaryButton';
 import { useClips } from '../../context/ClipsContext';
 import './ClipCard.css';
 
-const ClipCard = ({ clip, showRemove = true, withLink = true }) => {
+const ClipCard = ({ clip, showRemove = true, withLink = true, onRemove }) => {
   const { removeClip } = useClips();
   const { id, songTitle, artistName, description, duration, views, image } = clip;
+
+  const handleRemove = () => {
+    if (onRemove) {
+      onRemove(id);
+    } else {
+      removeClip(id);
+    }
+  };
 
   return (
     <article className="card" data-id={id}>
@@ -25,7 +33,8 @@ const ClipCard = ({ clip, showRemove = true, withLink = true }) => {
         <p className="card__specs">
           <strong>Виконавець:</strong> {artistName}
           <br />
-          <strong>Тривалість:</strong> {duration} сек. | <strong>Перегляди:</strong> {Number(views).toLocaleString('uk-UA')}
+          <strong>Тривалість:</strong> {duration} сек. | <strong>Перегляди:</strong>{' '}
+          {Number(views).toLocaleString('uk-UA')}
         </p>
         <div className="card__updated">Last updated 3 mins ago</div>
 
@@ -39,10 +48,7 @@ const ClipCard = ({ clip, showRemove = true, withLink = true }) => {
           )}
 
           {showRemove && (
-            <SecondaryButton
-              className="btn-card-remove"
-              onClick={() => removeClip(id)}
-            >
+            <SecondaryButton className="btn-card-remove" onClick={handleRemove}>
               Remove
             </SecondaryButton>
           )}

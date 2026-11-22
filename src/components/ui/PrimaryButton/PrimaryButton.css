@@ -16,3 +16,8 @@
 .primary-btn:hover {
   background-color: #0069d9;
 }
+
+.primary-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
