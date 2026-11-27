@@ -1,0 +1,51 @@
+.footer {
+  background-color: white;
+  border-top: 1px solid lightgray;
+  padding: 15px 30px;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: darkblue;
+}
+
+.footer-desc {
+  font-size: 13px;
+  color: gray;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-link {
+  font-size: 14px;
+  color: darkblue;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 13px;
+  color: gray;
+}
