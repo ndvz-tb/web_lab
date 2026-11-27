@@ -1,0 +1,9 @@
+.item-container {
+  max-width: 520px;
+  margin: 36px auto 60px auto;
+  padding: 0 16px;
+}
+
+.item-image {
+  height: 240px;
+}

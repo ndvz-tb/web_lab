@@ -1,0 +1,119 @@
+.card {
+  border: 1px solid #b5b5b5;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card__image {
+  background-color: #eeeeee;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 8px;
+}
+
+.card__desc {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #333333;
+  margin-bottom: 12px;
+  min-height: 58px;
+}
+
+.card__specs {
+  font-size: 13px;
+  color: #444444;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  min-height: 40px;
+}
+
+.card__specs strong {
+  color: #111111;
+}
+
+.card__updated {
+  font-size: 12.5px;
+  color: #888888;
+  margin-bottom: 16px;
+}
+
+.card__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  align-items: center;
+}
+
+.card__link {
+  flex: 1;
+  display: flex;
+  text-decoration: none;
+}
+
+.btn-card-edit {
+  flex: 1;
+  width: 100%;
+  height: 34px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #50b6dc !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 4px;
+}
+
+.btn-card-edit:hover {
+  background-color: #3fa5cb !important;
+}
+
+.btn-card-remove {
+  flex: 1;
+  height: 34px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+  font-weight: 500;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d3514d !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 4px;
+}
+
+.btn-card-remove:hover {
+  background-color: #bd433f !important;
+}
