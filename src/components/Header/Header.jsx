@@ -1,8 +1,13 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './Header.css';
 
 const Header = () => {
+  const totalCartCount = useSelector((state) =>
+    state.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
+
   return (
     <header className="header">
       <div className="header__left">
@@ -30,6 +35,15 @@ const Header = () => {
           className={({ isActive }) => `header__nav-item ${isActive ? 'active' : ''}`}
         >
           Create
+        </NavLink>
+        <NavLink
+          to="/cart"
+          className={({ isActive }) => `header__nav-item ${isActive ? 'active' : ''}`}
+        >
+          Cart
+          {totalCartCount > 0 && (
+            <span className="header__cart-badge">{totalCartCount}</span>
+          )}
         </NavLink>
       </nav>
 
